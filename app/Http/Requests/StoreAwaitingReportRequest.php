@@ -1,0 +1,121 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreAwaitingReportRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return auth()->check();
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $moneyFields = [
+            'total_amount',
+            'cash',
+            'cheque',
+            'pos',
+            'bank_transfer',
+            'return_inward',
+            'balance_to_use',
+            'difference',
+        ];
+
+        foreach ($moneyFields as $field) {
+            $this->merge([
+                $field => $this->$field
+                    ? str_replace(',', '', $this->$field)
+                    : 0
+            ]);
+        }
+    }
+
+    public function rules(): array
+    {
+        return [
+
+            'invoice_number' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+
+            'customer' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+
+            'payment_note' => [
+                'nullable',
+                'string',
+            ],
+
+            'total_amount' => [
+                'required',
+                'numeric',
+                'min:0',
+            ],
+
+            'cash' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'cheque' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'pos' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'bank_transfer' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'return_inward' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'balance_to_use' => [
+                'nullable',
+                'numeric',
+                'min:0',
+            ],
+
+            'difference' => [
+                'nullable',
+                'numeric',
+            ],
+
+            'is_balanced' => [
+                'nullable',
+                'boolean',
+            ],
+
+            'date' => [
+                'required',
+                'date',
+            ],
+
+            'shift' => [
+                'required',
+                'in:morning,afternoon,night',
+            ],
+        ];
+    }
+}
