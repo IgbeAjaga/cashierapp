@@ -45,6 +45,7 @@ class InvoiceReportImport implements ToCollection, WithHeadingRow, SkipsEmptyRow
                     'credit'           => (float) str_replace([',', ' '], '', (string) ($row['credit'] ?? 0)),
                     'pos'              => (float) str_replace([',', ' '], '', (string) ($row['pos'] ?? 0)),
                     'bank_transfer'    => (float) str_replace([',', ' '], '', (string) ($row['bank_transfer'] ?? 0)),
+                    'less_credit'    => (float) str_replace([',', ' '], '', (string) ($row['less_credit'] ?? 0)),
                     'balance_to_use'   => (float) str_replace([',', ' '], '', (string) ($row['balance_to_use'] ?? 0)),
                     'date'             => $row['date'] ?? now()->format('Y-m-d'),
                     'shift'            => strtolower(trim((string) ($row['shift'] ?? 'morning'))),

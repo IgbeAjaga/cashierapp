@@ -107,7 +107,7 @@
             'bank_transfer'     => 'Bank Transfer',
             'return_outward'    => 'Return Outward',
             'invoice_to_invoice'=> 'Invoice To Invoice',
-            'return_inward' => 'Add Return Inward',
+            'return_inward' => 'Return Inward',
             'less_credit'       => 'Less Credit',
             'balance_to_use'    => 'Balance To Use',
         ];

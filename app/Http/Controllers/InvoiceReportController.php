@@ -541,8 +541,8 @@ class InvoiceReportController extends Controller
 
     public function importTemplate()
     {
-        $headers = ['invoice_number', 'customer', 'payment_note', 'total_amount', 'cash', 'awaiting_invoice', 'cheque', 'credit', 'pos', 'bank_transfer', 'balance_to_use', 'date', 'shift'];
-        $example = ['394713', 'John Doe Pharmacy', 'Cash payment', '1500000', '1000000', '0', '0', '0', '500000', '0', '0', '2026-05-29', 'morning'];
+        $headers = ['invoice_number', 'customer', 'payment_note', 'total_amount', 'cash', 'awaiting_invoice', 'cheque', 'credit', 'pos', 'bank_transfer', 'less_credit', 'balance_to_use', 'date', 'shift'];
+        $example = ['394713', 'John Doe Pharmacy', 'Cash payment', '1500000', '1000000', '0', '0', '0', '500000', '0','0', '0', '2026-05-29', 'morning'];
 
         $csv = implode(',', $headers) . "\n" . implode(',', $example) . "\n";
 

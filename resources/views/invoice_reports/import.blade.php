@@ -74,6 +74,7 @@
                                 <th>credit</th>
                                 <th>pos</th>
                                 <th>bank_transfer</th>
+                                <th>less_credit</th>
                                 <th>balance_to_use</th>
                                 <th>date</th>
                                 <th>shift</th>
@@ -90,6 +91,7 @@
                                 <td>10000</td>
                                 <td>0</td>
                                 <td>20000</td>
+                                <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>2026-05-29</td>

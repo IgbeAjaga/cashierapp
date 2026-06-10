@@ -110,7 +110,7 @@ class OnlineTransactionController extends Controller
             'cash' => $query->sum('cash'),
             'cheque' => $query->sum('cheque'),
             'pos' => $query->sum('pos'),
-            'transfer' => $query->sum('transfer'),
+            'bank_transfer' => $query->sum('bank_transfer'),
             'return_inward' => $query->sum('return_inward'),
             'less_credit' => $query->sum('less_credit'),
             'balance_to_use' => $query->sum('balance_to_use'),

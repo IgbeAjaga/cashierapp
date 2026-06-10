@@ -19,7 +19,7 @@ class StoreOnlineTransactionRequest extends FormRequest
             'cash',
             'cheque',
             'pos',
-            'transfer',
+            'bank_transfer',
             'return_inward',
             'less_credit',
             'balance_to_use',
@@ -85,7 +85,7 @@ class StoreOnlineTransactionRequest extends FormRequest
                 'min:0',
             ],
 
-            'transfer' => [
+            'bank_transfer' => [
                 'nullable',
                 'numeric',
                 'min:0',

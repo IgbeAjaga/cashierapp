@@ -42,14 +42,23 @@
     <thead>
 
         <tr>
-            <th>Invoice</th>
+            <th>Invoice No</th>
             <th>Customer</th>
-            <th>Total</th>
+            <th>Date</th>
+            <th>Shift</th>
+            <th>Total Amount</th>
             <th>Cash</th>
+            <th>Awaiting</th>
+            <th>Cheque</th>
+            <th>Credit</th>
             <th>POS</th>
             <th>Transfer</th>
+            <th>Less Credit</th>
+            <th>Return Inward</th>
+            <th>Balance To Use</th>
             <th>Difference</th>
-            <th>Date</th>
+            <th>Return Outward</th>
+            <th>Invoice to Invoice</th>
         </tr>
 
     </thead>
@@ -61,20 +70,22 @@
             <tr>
 
                 <td>{{ $record->invoice_number }}</td>
-
                 <td>{{ $record->customer }}</td>
-
+                <td>{{ $record->date?->format('d M Y') }}</td>
+                <td>{{ ucfirst($record->shift) }}</td>
                 <td>{{ number_format($record->total_amount, 2) }}</td>
-
                 <td>{{ number_format($record->cash, 2) }}</td>
-
+                <td>{{ number_format($record->awaiting_invoice, 2) }}</td>
+                 <td>{{ number_format($record->cheque, 2) }}</td>
+                <td>{{ number_format($record->credit, 2) }}</td>
                 <td>{{ number_format($record->pos, 2) }}</td>
-
                 <td>{{ number_format($record->bank_transfer, 2) }}</td>
-
+                <td>{{ number_format($record->less_credit, 2) }}</td>
+                <td>{{ number_format($record->return_inward, 2) }}</td>
+                <td>{{ number_format($record->balance_to_use, 2) }}</td>
                 <td>{{ number_format($record->difference, 2) }}</td>
-
-                <td>{{ $record->created_at->format('d M Y') }}</td>
+                <td>{{ number_format($record->return_outward, 2) }}</td>
+                <td>{{ number_format($record->invoice_to_invoice, 2) }}</td>
 
             </tr>
 

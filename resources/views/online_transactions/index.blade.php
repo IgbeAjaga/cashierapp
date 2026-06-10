@@ -137,14 +137,28 @@
                                     <td>{{ number_format($transaction->less_credit ?? 0, 2) }}</td>
                                     <td>{{ number_format($transaction->balance_to_use, 2) }}</td>
                                     <td>
-                                        @if($transaction->difference != 0)
-                                            <span class="badge bg-danger">{{ number_format($transaction->difference, 2) }}</span>
-                                        @else
-                                            <span class="badge bg-success">Balanced</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $report->payment_note ?? '-' }}</td>
-                                    <td>{{ $report->cheque_details ?? '-' }}</td>                                    
+    @if($transaction->difference == 0)
+
+        <span class="badge bg-success">
+            Balanced
+        </span>
+
+    @elseif($transaction->difference < 0)
+
+        <span class="badge bg-danger">
+            Company Owes: {{ number_format(abs($transaction->difference), 2) }}
+        </span>
+
+    @else
+
+        <span class="badge bg-warning text-dark">
+            Customer Owes: {{ number_format($transaction->difference, 2) }}
+        </span>
+
+    @endif
+</td>
+                                    <td>{{ $transaction->payment_note ?? '-' }}</td>
+                                    <td>{{ $transaction->cheque_details ?? '-' }}</td>                                    
                                     <td>
                                         @if($transaction->histories_count > 0)
                                             <span class="badge bg-warning">{{ $transaction->histories_count }}</span>
@@ -206,7 +220,7 @@
                                 <td>{{ number_format($totals['cash'], 2) }}</td>
                                 <td>{{ number_format($totals['cheque'], 2) }}</td>
                                 <td>{{ number_format($totals['pos'], 2) }}</td>
-                                <td>{{ number_format($totals['transfer'], 2) }}</td>
+                                <td>{{ number_format($totals['bank_transfer'], 2) }}</td>
                                 <td>{{ number_format($totals['return_inward'] ?? 0, 2) }}</td>
                                 <td>{{ number_format($totals['less_credit'] ?? 0, 2) }}</td>
                                 <td>{{ number_format($totals['balance_to_use'], 2) }}</td>

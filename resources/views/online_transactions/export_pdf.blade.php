@@ -49,6 +49,9 @@
             <th>Cheque</th>
             <th>POS</th>
             <th>Transfer</th>
+            <th>Less Credit</th>
+            <th>Return Inward</th>
+            <th>Balance To Use</th>
             <th>Difference</th>
             <th>Shift</th>
             <th>Date</th>
@@ -75,6 +78,12 @@
                 <td>{{ number_format($record->pos, 2) }}</td>
 
                 <td>{{ number_format($record->transfer, 2) }}</td>
+
+                <td>{{ number_format($record->less_credit, 2) }}</td>
+
+                <td>{{ number_format($record->return_inward, 2) }}</td>
+                
+                <td>{{ number_format($record->balance_to_use, 2) }}</td>
 
                 <td>{{ number_format($record->difference, 2) }}</td>
 

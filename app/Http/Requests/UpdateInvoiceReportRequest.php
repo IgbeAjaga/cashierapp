@@ -30,7 +30,7 @@ class UpdateInvoiceReportRequest extends FormRequest
             'bank_transfer',
             'return_outward',
             'invoice_to_invoice',
-            'add_return_inward',
+            'return_inward',
             'less_credit',
             'balance_to_use',
             'difference',

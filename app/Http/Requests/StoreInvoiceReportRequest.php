@@ -138,7 +138,7 @@ class StoreInvoiceReportRequest extends FormRequest
                 'string',
             ],
 
-            'add_return_inward' => [
+            'return_inward' => [
                 'nullable',
                 'numeric',
                 'min:0',

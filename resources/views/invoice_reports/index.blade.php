@@ -98,12 +98,12 @@
                                 <th>Credit</th>
                                 <th>POS</th>
                                 <th>Transfer</th>
-                                <th>Balance To Use</th>
                                 <th>Less Credit</th>
+                                <th>Return Inward</th>
+                                <th>Balance To Use</th>                                
                                 <th>Difference</th>
                                 <th>Return Outward</th>
-                                <th>Invoice To Invoice</th>
-                                <th>Return Inward</th>
+                                <th>Invoice To Invoice</th>                                
                                 <th>Payment Note</th>
                                 <th>Cheque Details</th>
                                 <th>POS Details</th>
@@ -140,18 +140,26 @@
                                     <td>{{ number_format($report->credit, 2) }}</td>
                                     <td>{{ number_format($report->pos, 2) }}</td>
                                     <td>{{ number_format($report->bank_transfer, 2) }}</td>
-                                    <td>{{ number_format($report->balance_to_use, 2) }}</td>
                                     <td>{{ number_format($report->less_credit ?? 0, 2) }}</td>
+                                    <td>{{ number_format($report->return_inward ?? 0, 2) }}</td>
+                                    <td>{{ number_format($report->balance_to_use, 2) }}</td>                                    
                                     <td>
-                                        @if($report->difference != 0)
-                                            <span class="badge bg-danger">{{ number_format($report->difference, 2) }}</span>
-                                        @else
-                                            <span class="badge bg-success">Balanced</span>
-                                        @endif
+                                    @if($report->difference == 0)
+                                    <span class="badge bg-success">
+                                    Balanced
+                                    </span>
+                                    @elseif($report->difference < 0)
+                                    <span class="badge bg-danger">
+                                    Company Owes: {{ number_format(abs($report->difference), 2) }}
+                                    </span>
+                                    @else
+                                    <span class="badge bg-warning text-dark">
+                                    Customer Owes: {{ number_format($report->difference, 2) }}
+                                    </span>
+                                    @endif
                                     </td>
                                     <td>{{ number_format($report->return_outward ?? 0, 2) }}</td>
-                                    <td>{{ number_format($report->invoice_to_invoice ?? 0, 2) }}</td>
-                                    <td>{{ number_format($report->return_inward ?? 0, 2) }}</td>
+                                    <td>{{ number_format($report->invoice_to_invoice ?? 0, 2) }}</td>                                    
                                     <td>{{ $report->payment_note ?? '-' }}</td>
                                     <td>{{ $report->cheque_details ?? '-' }}</td>
                                     <td>{{ $report->pos_details ?? '-' }}</td>
@@ -231,8 +239,8 @@
                         </tfoot>
                     </table>
                     <div class="mt-3">
-    {{ $invoiceReports->onEachSide(1)->links('pagination::bootstrap-5') }}
-</div>
+                    {{ $invoiceReports->onEachSide(1)->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>                
             </div>
         </div>

@@ -1,0 +1,16 @@
+{
+    "name": "Cashier App",
+    "short_name": "Cashier App",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "description": "A Progressive Web Application setup for Laravel projects.",
+    "theme_color": "#3f51b5",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

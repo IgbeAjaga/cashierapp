@@ -242,6 +242,9 @@
                 <a href="{{ route('login') }}" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.125rem;">
                     Login to Dashboard
                 </a>
+                <a href="/register" class="btn-outline" style="padding: 1rem 2rem; font-size: 1.125rem;">
+                Register
+            </a>
             @endif
         </div>
 

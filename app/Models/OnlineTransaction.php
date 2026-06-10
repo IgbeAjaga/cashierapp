@@ -23,7 +23,7 @@ class OnlineTransaction extends Model
         'cheque',
         'cheque_details',
         'pos',
-        'transfer',
+        'bank_transfer',
         'return_inward',
         'less_credit',
         'balance_to_use',

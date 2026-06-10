@@ -148,12 +148,26 @@
                                     <td>{{ number_format($report->return_inward ?? 0, 2) }}</td>
                                     <td>{{ number_format($report->balance_to_use, 2) }}</td>
                                     <td>
-                                        @if($report->difference != 0)
-                                            <span class="badge bg-danger">{{ number_format($report->difference, 2) }}</span>
-                                        @else
-                                            <span class="badge bg-success">Balanced</span>
-                                        @endif
-                                    </td>
+    @if($report->difference == 0)
+
+        <span class="badge bg-success">
+            Balanced
+        </span>
+
+    @elseif($report->difference < 0)
+
+        <span class="badge bg-danger">
+            Company Owes: {{ number_format(abs($report->difference), 2) }}
+        </span>
+
+    @else
+
+        <span class="badge bg-warning text-dark">
+            Customer Owes: {{ number_format($report->difference, 2) }}
+        </span>
+
+    @endif
+</td>
                                     <td>{{ $report->payment_note ?? '-' }}</td>                                    
                                     <td>
                                         @if($report->histories_count > 0)

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="loading hide bordered-layout" lang="en" data-layout="bordered-layout" data-textdirection="ltr"><!-- dark-layout -->
 <head>
+    @PwaHead
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
@@ -568,6 +569,57 @@
         });
     }
 </script>
+@RegisterServiceWorkerScript
+
+<script>
+(function () {
+    'use strict';
+ 
+    // Refresh the CSRF token every 20 minutes.
+    // This prevents 419 Page Expired errors when the user
+    // has the PWA open on their device for a long time.
+    var INTERVAL = 20 * 60 * 1000; // 20 minutes
+ 
+    function refreshToken() {
+        fetch('/csrf-token-refresh', {
+            method:      'GET',
+            credentials: 'same-origin',
+            headers:     { 'Accept': 'application/json' }
+        })
+        .then(function (res) {
+            if (!res.ok) return;
+            return res.json();
+        })
+        .then(function (data) {
+            if (!data || !data.token) return;
+ 
+            // 1. Update the meta tag (used by fetch() calls)
+            var meta = document.querySelector('meta[name="csrf-token"]');
+            if (meta) meta.setAttribute('content', data.token);
+ 
+            // 2. Update all hidden _token fields on the page
+            document.querySelectorAll('input[name="_token"]').forEach(function (el) {
+                el.value = data.token;
+            });
+ 
+            // 3. Update jQuery AJAX default header (theme uses jQuery)
+            if (typeof $ !== 'undefined') {
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': data.token }
+                });
+            }
+ 
+            console.log('[CSRF] Token refreshed.');
+        })
+        .catch(function () {
+            // Silent fail — next form submission will get a 419
+            // but at least it won't happen during idle time
+        });
+    }
+ 
+    setInterval(refreshToken, INTERVAL);
+})();
+</script>    
     
 </body>
 </html>
